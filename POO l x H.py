@@ -12,7 +12,7 @@ class Rectangle:
     
     def get_hauteur(self):
         return self.hauteur
-
-rectangle1 = Rectangle(16,15)
-rectangle1.get_surface()
-print(rectangle1.get_surface())
+width = int(input("Enter a width : "))
+height = int(input("Enter a height : "))
+rectangle1 = Rectangle(width,height)
+print(f"width = {rectangle1.get_largeur()}, height = {rectangle1.get_hauteur()}, and area = {rectangle1.get_surface()}")

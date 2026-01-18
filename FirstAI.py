@@ -1,24 +1,34 @@
 from sklearn.linear_model import LogisticRegression
+import random
 
-NombreHeureRevision = [[1], [2], [3], [4], [5], [6], [7], [8]]
 
-Resultat = [0, 0, 0, 0, 1, 1, 1, 1]
+X = [[0], [1], [2], [3], [4], [5], [6], [7], [8]]
+
+y = [0, 0, 0, 0, 0, 1, 1, 1, 1]
+
+
 
 model = LogisticRegression()
-model.fit(NombreHeureRevision, Resultat) # IA apprend à partir des données.
-nombre_utilisateurs = 5
-i = 0
-heures = []
-while i < nombre_utilisateurs:
-    heures_utilisateurs = int(input("Donnez un nombre d'heure : "))
-    heures.append([[heures_utilisateurs]])
-    i = i + 1
+model.fit(X, y)
 
-predictions = model.predict(heures)
 
-for h, p in zip(heures, predictions):
-    if p == 1:
-        print(f"{h[0]} heures → Réussite probable")
+def decision_ia(heures):
+    proba_reussite = model.predict_proba([[heures]])[0][1]
+
+    
+    tirage = random.random()
+
+    if tirage <= proba_reussite:
+        return f"✅ Réussite ({proba_reussite*100:.1f}%)"
     else:
-        print(f"{h[0]} heures → Échec probable")
+        return f"❌ Échec ({(1 - proba_reussite)*100:.1f}%)"
+
+
+nombre_tests = 99999
+i = 0
+
+while i < nombre_tests:
+    heures = int(input("Donne un nombre d'heures : "))
+    print(f"{heures} heures → {decision_ia(heures)}")
+    i += 1
 print(p)
